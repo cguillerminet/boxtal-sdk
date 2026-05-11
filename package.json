@@ -24,10 +24,23 @@
     "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run lint && npm test && npm run clean && npm run build"
   },
   "engines": {
     "node": ">=22.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cguillerminet/boxtal-sdk.git"
+  },
+  "homepage": "https://github.com/cguillerminet/boxtal-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/cguillerminet/boxtal-sdk/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "keywords": [
     "boxtal",

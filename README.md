@@ -132,3 +132,26 @@ npm run lint        # eslint .
 npm test            # vitest run
 npm run build       # tsc → dist/
 ```
+
+## CI / Release
+
+Two GitHub Actions workflows are wired up:
+
+- **[`.github/workflows/ci.yml`](.github/workflows/ci.yml)** — runs on every push to `main` and every PR. Matrix-tests Node 22 + 24: typecheck → lint → test → build.
+- **[`.github/workflows/release.yml`](.github/workflows/release.yml)** — fires on `v*` git tags. Verifies the tag matches `package.json` version, runs the full pipeline, publishes to npm (with provenance), then creates a GitHub Release with auto-generated notes.
+
+### One-time setup before the first release
+
+1. **NPM access token** — create an automation token on npmjs.com, then add it as a repository secret named `NPM_TOKEN` (Settings → Secrets and variables → Actions).
+2. **Optional: `npm` environment** — for an extra manual-approval gate, create a GitHub environment called `npm` (Settings → Environments) and scope `NPM_TOKEN` to it. The workflow already references `environment: npm`; remove that block if you don't want the gate.
+3. **Provenance** — already on (`publishConfig.provenance: true`). It requires `id-token: write` (set in the workflow) and a matching `repository` field in `package.json` (set to the cguillerminet/boxtal-sdk repo).
+
+### Cutting a release
+
+```bash
+npm version patch           # or minor / major — bumps package.json + creates a git tag
+git push --follow-tags      # pushes the commit and the new vX.Y.Z tag
+```
+
+The tag push triggers `release.yml`, which republishes if everything is green.
+
