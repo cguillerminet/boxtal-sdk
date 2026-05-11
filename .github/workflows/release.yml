@@ -18,15 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: npm
-      url: https://www.npmjs.com/package/@l1l1/boxtal-sdk
+      url: https://www.npmjs.com/package/@cygt/boxtal-sdk
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
+          node-version: "24"
           cache: npm
 
       - run: npm ci
@@ -48,8 +47,8 @@ jobs:
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+          NODE_AUTH_TOKEN: ""
+        run: npm publish --provenance
 
       - name: Create GitHub Release
         env:

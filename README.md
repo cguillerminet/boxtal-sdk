@@ -1,4 +1,4 @@
-# @l1l1/boxtal-sdk
+# @cygt/boxtal-sdk
 
 TypeScript SDK for the [Boxtal API v3](https://developer.boxtal.com/fr/fr/apiv3/guide/getting-started-api-v3) — JSON over HTTPS.
 Zero runtime dependencies, ESM, Node.js ≥ 22 (uses native `fetch`, `AbortSignal.timeout/any`, `node:crypto`, `Buffer`).
@@ -13,7 +13,7 @@ npm run build
 ## Quick start
 
 ```ts
-import { BoxtalClient } from "@l1l1/boxtal-sdk";
+import { BoxtalClient } from "@cygt/boxtal-sdk";
 
 const client = new BoxtalClient({
   accessKey: process.env.BOXTAL_ACCESS_KEY!,
@@ -80,7 +80,7 @@ Network failures throw `BoxtalNetworkError`; timeouts (default 30s) throw
 ## Webhooks
 
 ```ts
-import { verifyWebhookSignature, type WebhookEventPayload } from "@l1l1/boxtal-sdk";
+import { verifyWebhookSignature, type WebhookEventPayload } from "@cygt/boxtal-sdk";
 
 app.post("/boxtal-webhook", express.raw({ type: "application/json" }), (req, res) => {
   if (!verifyWebhookSignature(req.body, req.headers["x-bxt-signature"], process.env.WEBHOOK_SECRET!)) {

@@ -1,6 +1,6 @@
 {
-  "name": "@l1l1/boxtal-sdk",
-  "version": "1.0.0",
+  "name": "@cygt/boxtal-sdk",
+  "version": "1.0.1",
   "description": "TypeScript SDK for Boxtal API v3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -39,8 +39,7 @@
     "url": "https://github.com/cguillerminet/boxtal-sdk/issues"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "keywords": [
     "boxtal",
